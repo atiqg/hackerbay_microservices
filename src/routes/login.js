@@ -1,10 +1,12 @@
-/** Express router providing user login routes
+/**
+ * Express router providing user login routes
  * @module routes/login
  * @requires express
  * @requires jsonwebtoken
  * @requires dotenv/config
  * @requires env secret key
  */
+
 //IMPORT JWT PACKAGE
 import jwt from 'jsonwebtoken';
 //PACKAGE FOR ENV VARIABLES
@@ -44,27 +46,30 @@ router.post('/', (req, res) => {
     //set variables
     const { username, password } = req.body;
 
-    //accept any arbitrary user
-    const user = true; //user verification logic
-    let accessToken;
+    //accept any arbitrary user (user verification logic)
+    const user = true;
+    let accessToken = '';
 
     //if user exist
     if (user) {
-        try {
-            //check if pass is not too small
-            if(password.length < 3) throw "password is too small, try more than 2 digit password";
-            //generate json web token
-            accessToken = jwt.sign({ username: username,  password: password }, accessTokenSecret);
-        } catch (err) {
+        return function () {
 
-            //log and pass error
-            logger.error('server.endpoint.post.login.try_catch.error: ' + err);
-            return res.json({error: err});
-        }
-
-        //send res
-        logger.info('server.endpoint.post.login.return_signed_jwt.ended');
-        return res.json({ accessToken });
+            try {
+                //check if pass is not too small
+                if (password.length < 3) throw new Error('password is too small, try more than 2 digit password');
+                //generate json web token
+                accessToken = jwt.sign({ username: username,  password: password }, accessTokenSecret);
+            } catch (err) {
+    
+                //log and pass error
+                logger.error(`server.endpoint.post.login.try_catch.error: ${err}`);
+                return res.json({error: err});
+            }
+    
+            //send res
+            logger.info('server.endpoint.post.login.return_signed_jwt.ended');
+            return res.json({ accessToken });
+        };
     }
 });
 

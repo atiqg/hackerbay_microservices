@@ -1,4 +1,5 @@
-/** Express router providing json patch routes
+/**
+ * Express router providing json patch routes
  * @module routes/patch
  * @requires express
  * @requires jsonpatch
@@ -34,31 +35,34 @@ const accessTokenSecret = process.env.MY_SECRET;
  * @param {object} req api/patch auth request object
  * @param {object} res api/patch auth response object
  * @param {callback} next function to invoke next middleware
+ * @returns {middleware} next() (if jwt verified)
  */
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
-    //if jwt is provided
-    if (authHeader) {
-        const token = authHeader.split(' ')[1];
+    return function () {
+        //if jwt is provided
+        if (authHeader) {
+            const token = authHeader.split(' ')[1];
 
-        //verify it with env secret key
-        jwt.verify(token, accessTokenSecret, (err, user) => {
-            if (err) {
-                //log and pass error
-                logger.error('server.endpoint.patch.patch.jwt_authentication.error: ' + err);
-                return res.json({error: err});
-            }
+            //verify it with env secret key
+            jwt.verify(token, accessTokenSecret, (err, user) => {
+                if (err) {
+                    //log and pass error
+                    logger.error(`server.endpoint.patch.patch.jwt_authentication.error: ${err}`);
+                    return res.json({error: err});
+                }
 
-            //pass request
-            req.user = user;
-            next();
-        });
-    } else {
-        //log and pass error
-        logger.error('server.endpoint.patch.patch.jwt_not_provided.error');
-        return res.json({error: 'access token is not provided'});
-    }
+                //pass request
+                req.user = user;
+                next();
+            });
+        } else {
+            //log and pass error
+            logger.error('server.endpoint.patch.patch.jwt_not_provided.error');
+            return res.json({error: 'access token is not provided'});
+        }      
+    };
 };
 
 
@@ -79,21 +83,23 @@ router.patch('/', authenticateJWT, (req, res) => {
     }
 
     //set variables
-    let unPatched = req.body.unPatched;
-    let patch = req.body.patch;
-    let patched;
+    const unPatched = req.body.unPatched;
+    const patch = req.body.patch;
+    let patched = '';
 
-    //patch json
-    try {
-        patched = jsonpatch.apply_patch(unPatched, [ patch ]);
-    } catch (err) {
-        //log and pass error
-        logger.error('server.endpoint.patch.patch.try_catch.error: ' + err);
-        return res.json({error: err});
-    }
+    return function () {
+        //patch json
+        try {
+            patched = jsonpatch.apply_patch(unPatched, [ patch ]);
+        } catch (err) {
+            //log and pass error
+            logger.error(`server.endpoint.patch.patch.try_catch.error: ${err}`);
+            return res.json({error: err});
+        }
 
-    logger.info('server.endpoint.patch.patch.return_patched_json.ended');
-    return res.send(patched);
+        logger.info('server.endpoint.patch.patch.return_patched_json.ended');
+        return res.send(patched);    
+    };
 });
 
 

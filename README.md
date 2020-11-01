@@ -167,4 +167,4 @@ If you have used the app or tests then log file can be found here:
 </br>
 
 ## LICENSE: <i id="license"></i>
-[MIT](https://github.com/atiqg/hackerbay_microservices)
+[MIT](https://github.com/atiqg/hackerbay_microservices/blob/main/LICENSE)

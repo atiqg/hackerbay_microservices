@@ -1,4 +1,5 @@
-/** Express router providing thumbnail generation routes
+/**
+ * Express router providing thumbnail generation routes
  * @module routes/thumbnail
  * @requires express
  * @requires image-thumbnail
@@ -36,6 +37,7 @@ const accessTokenSecret = process.env.MY_SECRET;
  * @param {object} req api/thumbnail auth request object
  * @param {object} res api/thumbnail auth response object
  * @param {callback} next function to invoke next middleware
+ * @returns {middleware} next (if jwt verified)
  */
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -48,7 +50,7 @@ const authenticateJWT = (req, res, next) => {
         jwt.verify(token, accessTokenSecret, (err, user) => {
             if (err) {
                 //log and pass error
-                logger.error('server.endpoint.get.thumbnail.jwt_authentication.error: ' + err);
+                logger.error(`server.endpoint.get.thumbnail.jwt_authentication.error: ${err}`);
                 return res.json({error: err});
             }
 
@@ -93,7 +95,7 @@ router.get('/', authenticateJWT, async (req, res) => {
         });
     } catch (err) {
         //log and pass error
-        logger.error('server.endpoint.get.thumbnail.try_catch.error: ' + err);
+        logger.error(`server.endpoint.get.thumbnail.try_catch.error: ${err}`);
         return res.json({error: err});
     }
 });
