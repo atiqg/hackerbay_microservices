@@ -38,10 +38,10 @@ Project Include Dockerizing app, API tests, Code coverage report, JSdoc, Central
 [✔️] Really, please just don’t use “console.log” as the primary debugging/logging tool.      
 [✔️] Use a javascript linter, along with a linting npm script.       
 [✔️] Dockerize, include a working Dockerfile with the app directory.        
-[✓] Push a docker image to public DockerHub, and share the link     
+[✔️] Push a docker image to public DockerHub, and share the link     
 
 ### Bonus: <i id="bonus"></i>
-[✓] 100% code coverage in test suite.       
+[✔️] 100% code coverage in test suite.       
 [✔️] We recommend using [Istanbul](https://github.com/gotwarlost/istanbul) to generate code test coverage reports.      
 [✔️] Include JSdoc comments and/or Swagger specifications to impress us.        
 [✔️] Integrate a centralized app logging/monitoring system.      
@@ -155,7 +155,7 @@ Run docker image using:
 docker run image_id/tag_name
 ```
 
-<b>Or you can use my public image at [DockerHub](https://github.com/atiqg/hackerbay_microservices)</b>
+<b>Or you can use my public image at [DockerHub](https://hub.docker.com/repository/docker/atiqgauri/microservices_api)</b>
 
 </br>
 
