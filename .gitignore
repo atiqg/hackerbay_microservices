@@ -1,0 +1,18 @@
+#rest client
+.http
+
+#log
+*.log
+
+#JSdoc
+out
+
+.env
+
+.nyc_output
+
+coverage
+
+node_modules/
+
+assets/thumbnail.png

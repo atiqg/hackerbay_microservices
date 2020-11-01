@@ -1,0 +1,20 @@
+node_modules
+npm-debug.log
+assets/thumbnail.png
+logs
+*.log
+npm-debug.log*
+docs
+out
+*.md
+coverage
+.nyc_output
+.http
+
+# Optional npm cache directory
+.npm
+
+# Git file
+.git
+*Dockerfile*
+*docker-compose*
