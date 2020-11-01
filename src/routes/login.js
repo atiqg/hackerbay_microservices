@@ -52,24 +52,21 @@ router.post('/', (req, res) => {
 
     //if user exist
     if (user) {
-        return function () {
+        try {
+            //check if pass is not too small
+            if (password.length < 3) throw new Error('password is too small, try more than 2 digit password');
+            //generate json web token
+            accessToken = jwt.sign({ username: username,  password: password }, accessTokenSecret);
+        } catch (err) {
 
-            try {
-                //check if pass is not too small
-                if (password.length < 3) throw new Error('password is too small, try more than 2 digit password');
-                //generate json web token
-                accessToken = jwt.sign({ username: username,  password: password }, accessTokenSecret);
-            } catch (err) {
-    
-                //log and pass error
-                logger.error(`server.endpoint.post.login.try_catch.error: ${err}`);
-                return res.json({error: err});
-            }
-    
-            //send res
-            logger.info('server.endpoint.post.login.return_signed_jwt.ended');
-            return res.json({ accessToken });
-        };
+            //log and pass error
+            logger.error(`server.endpoint.post.login.try_catch.error: ${err}`);
+            return res.json({error: err});
+        }
+
+        //send res
+        logger.info('server.endpoint.post.login.return_signed_jwt.ended');
+        return res.json({ accessToken });
     }
 });
 

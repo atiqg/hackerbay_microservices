@@ -40,29 +40,27 @@ const accessTokenSecret = process.env.MY_SECRET;
 const authenticateJWT = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
-    return function () {
-        //if jwt is provided
-        if (authHeader) {
-            const token = authHeader.split(' ')[1];
+    //if jwt is provided
+    if (authHeader) {
+        const token = authHeader.split(' ')[1];
 
-            //verify it with env secret key
-            jwt.verify(token, accessTokenSecret, (err, user) => {
-                if (err) {
-                    //log and pass error
-                    logger.error(`server.endpoint.patch.patch.jwt_authentication.error: ${err}`);
-                    return res.json({error: err});
-                }
+        //verify it with env secret key
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if (err) {
+                //log and pass error
+                logger.error(`server.endpoint.patch.patch.jwt_authentication.error: ${err}`);
+                return res.json({error: err});
+            }
 
-                //pass request
-                req.user = user;
-                next();
-            });
-        } else {
-            //log and pass error
-            logger.error('server.endpoint.patch.patch.jwt_not_provided.error');
-            return res.json({error: 'access token is not provided'});
-        }      
-    };
+            //pass request
+            req.user = user;
+            next();
+        });
+    } else {
+        //log and pass error
+        logger.error('server.endpoint.patch.patch.jwt_not_provided.error');
+        return res.json({error: 'access token is not provided'});
+    }  
 };
 
 
@@ -87,19 +85,17 @@ router.patch('/', authenticateJWT, (req, res) => {
     const patch = req.body.patch;
     let patched = '';
 
-    return function () {
-        //patch json
-        try {
-            patched = jsonpatch.apply_patch(unPatched, [ patch ]);
-        } catch (err) {
-            //log and pass error
-            logger.error(`server.endpoint.patch.patch.try_catch.error: ${err}`);
-            return res.json({error: err});
-        }
+    //patch json
+    try {
+        patched = jsonpatch.apply_patch(unPatched, [ patch ]);
+    } catch (err) {
+        //log and pass error
+        logger.error(`server.endpoint.patch.patch.try_catch.error: ${err}`);
+        return res.json({error: err});
+    }
 
-        logger.info('server.endpoint.patch.patch.return_patched_json.ended');
-        return res.send(patched);    
-    };
+    logger.info('server.endpoint.patch.patch.return_patched_json.ended');
+    return res.send(patched);  
 });
 
 

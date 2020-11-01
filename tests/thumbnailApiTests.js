@@ -15,7 +15,7 @@ describe("/thumbnail", () => {
     it("should return a success object with thumbnail address", async function() {
         jwt = await get_jwt();
 
-        this.timeout(15000);
+        this.timeout(20000);
         
         const res = await chai
         .request("http://localhost:"+process.env.PORT)
