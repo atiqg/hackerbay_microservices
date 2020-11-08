@@ -14,7 +14,7 @@ Project Include Dockerizing app, API tests, Code coverage report, JSdoc, Central
 * [JSdoc](#jsdoc)
 * [JS linter](#lint)
 * [Dockerize](#docker)
-* [Logs](#logs)
+* [Central Log system](#logs)
 * [License](#license)
 </br>
 </br> 
@@ -129,7 +129,7 @@ Then we can check coverage report by opening `coverage/index.html` file
 </br>
 
 ## JSdoc: <i id="jsdoc"></i> 
-Run this command to generate JSdoc:
+Run this command to generate JSdoc (require npm JSDoc package globally installed):
 ```
 npm run docs
 ```
@@ -159,7 +159,7 @@ docker run image_id/tag_name
 
 </br>
 
-## Logs: <i id="logs"></i>
+## Central Log system: <i id="logs"></i>
 This project doesn't use console.log anywhere, instead it uses [winston](https://www.npmjs.com/package/winston) to generate a central log file,       
 If you have used the app or tests then log file can be found here:           
 `app.log`
