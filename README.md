@@ -1,4 +1,4 @@
-# hackerbay_microservices
+# microservices_api
 Backend microservices to support and simplify applications. Simple stateless microservices in Nodejs, with three major functionalities: Authentication with Json web token, JSON Patching and Image Thumbnail Generation.      
 Project Include Dockerizing app, API tests, Code coverage report, JSdoc, Central Logging system and javascript linting.
 </br>
