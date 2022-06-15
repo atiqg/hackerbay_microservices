@@ -22,29 +22,29 @@ Project Include Dockerizing app, API tests, Code coverage report, JSdoc, Central
 
 ## Assignments: <i id="assignments"></i>
 
-[✔️] Authentication API       
-[✔️] JSON patching API        
-[✔️] Image Thumbnail Generation API           
-[✔️] Authentication request return a signed  [JWT]( https://jwt.io/) which can be used to validate future requests      
-[✔️] If the JWT is missing or invalid, these endpoints should reject the request.      
-[✔️] Patch and thumbnail request must be protected with JWT           
-[✔️] Apply the [json patch](http://jsonpatch.com/) to the json object, and return the resulting json object.     
-[✔️] Create thumbnail(50x50 pixels) of a public image URL and return the resulting thumbnail       
-[✔️] Include a test suite for the microservices using [Mocha](https://mochajs.org/).    
-[✔️] Use modern javascript ES6 syntax.       
-[✔️] Use Git for version control, and host the project in a Github repository       
-[✔️] Project should contain documentation with setup and usage instructions.        
-[✔️] Project should install all dependencies with “npm install”, should start the server with “npm start”, and should run the test suite with “npm test”.             
-[✔️] Really, please just don’t use “console.log” as the primary debugging/logging tool.      
-[✔️] Use a javascript linter, along with a linting npm script.       
-[✔️] Dockerize, include a working Dockerfile with the app directory.        
-[✔️] Push a docker image to public DockerHub, and share the link     
+[✅] Authentication API       
+[✅] JSON patching API        
+[✅] Image Thumbnail Generation API           
+[✅] Authentication request return a signed  [JWT]( https://jwt.io/) which can be used to validate future requests      
+[✅] If the JWT is missing or invalid, these endpoints should reject the request.      
+[✅] Patch and thumbnail request must be protected with JWT           
+[✅] Apply the [json patch](http://jsonpatch.com/) to the json object, and return the resulting json object.     
+[✅] Create thumbnail(50x50 pixels) of a public image URL and return the resulting thumbnail       
+[✅] Include a test suite for the microservices using [Mocha](https://mochajs.org/).    
+[✅] Use modern javascript ES6 syntax.       
+[✅] Use Git for version control, and host the project in a Github repository       
+[✅] Project should contain documentation with setup and usage instructions.        
+[✅] Project should install all dependencies with “npm install”, should start the server with “npm start”, and should run the test suite with “npm test”.             
+[✅] Really, please just don’t use “console.log” as the primary debugging/logging tool.      
+[✅] Use a javascript linter, along with a linting npm script.       
+[✅] Dockerize, include a working Dockerfile with the app directory.        
+[✅] Push a docker image to public DockerHub, and share the link     
 
 ### Bonus: <i id="bonus"></i>
-[✔️] 100% code coverage in test suite.       
-[✔️] We recommend using [Istanbul](https://github.com/gotwarlost/istanbul) to generate code test coverage reports.      
-[✔️] Include JSdoc comments and/or Swagger specifications to impress us.        
-[✔️] Integrate a centralized app logging/monitoring system.      
+[✅] 100% code coverage in test suite.       
+[✅] We recommend using [Istanbul](https://github.com/gotwarlost/istanbul) to generate code test coverage reports.      
+[✅] Include JSdoc comments and/or Swagger specifications to impress us.        
+[✅] Integrate a centralized app logging/monitoring system.      
 
 </br>
 
